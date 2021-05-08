@@ -7,6 +7,17 @@ $ python3 csv_json.py your_file.csv
 
 import csv, json, sys
 
+"""NOTE: This could be done in more pythonic way without all the 'fluff' of different
+functions/exception handling and main() as follows: 
+
+    # if no headers
+    reader = csv.reader(open(sys.argv[1], 'r'))
+
+"""
+
+# reader = csv.DictReader(open(sys.argv[1], 'r', encoding = 'utf-8'))
+# print(json.dumps([row for row in reader], indent = 2))
+
 
 def read_file():
     """Opens the file designated by user and checks whether file name was provided."""
@@ -18,8 +29,6 @@ def read_file():
     try:
         filename = sys.argv[1]
         if filename.endswith('.csv'):
-            # Comment in/out appropriate format depending on whether file is binary or not
-            # csv_file = open(filename, 'rb')
             csv_file = open(filename, 'r', encoding = 'utf-8')
         else:
             raise(SystemExit)(f"The {filename} file is not csv format. Please try another file as follows:\n$ python3 this_file.py your_file.csv")
